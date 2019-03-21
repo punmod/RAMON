@@ -1,0 +1,67 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/products']"><mat-icon>list</mat-icon></a> Ask the Question
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="productForm" (ngSubmit)="onFormSubmit(productForm.value)">
+      <mat-form-field class="example-full-width" >
+          <mat-select placeholder="Session"  formControlName="type_prog">
+             
+              <mat-optgroup *ngFor="let group of sessionGroups" [label]="group.name"
+                            [disabled]="group.disabled">
+                <mat-option  *ngFor="let session of group.session" [value]="session.value">
+                  {{session.viewValue}}
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width" >
+        <mat-select placeholder="College"  formControlName="title_prog" multiple>
+            
+            <mat-optgroup *ngFor="let group of collegeGroups" [label]="group.name"
+                          [disabled]="group.disabled">
+              <mat-option  *ngFor="let college of group.college" [value]="college.value">
+                {{college.viewValue}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" >
+      <mat-select placeholder="Select Parameters"  formControlName="duration" multiple>
+        <mat-optgroup *ngFor="let group of parameterGroups" [label]="group.name"
+        [disabled]="group.disabled">
+<mat-option  *ngFor="let parameter of group.parameter" [value]="parameter.value">
+{{parameter.viewValue}}
+</mat-option>
+</mat-optgroup>
+          </mat-select>
+  </mat-form-field>
+        <div class="button-row">
+        <button type="submit" [disabled]="!productForm.valid" mat-flat-button color="primary"><mat-icon>question_answer</mat-icon> Ask</button>
+      </div>
+    </form>
+  </mat-card>
+ 
+</div>
+
+<div>
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
+ 
+</div>
+
+
